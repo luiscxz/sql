@@ -1,1 +1,1 @@
-Contiene los scrip realizados en el master SQL
+Contiene los scrips realizados en el master SQL
