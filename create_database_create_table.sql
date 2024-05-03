@@ -23,3 +23,35 @@ select tipo_delito,perdida from modulo_victimizacion;
 select *from modulo_victimizacion order by apellido asc;  
 -- ordenando por apellido asc y perdida descendente, y que solo me muesta las columnas nombre, apellido, pérdida
 select nombre,apellido,perdida from modulo_victimizacion order by apellido asc,perdida desc;
+---------------------------------------------------------------------------------------------
+---Filtrado de información
+-- seleccionando toda la tabla dónde la pérdida es >1000 y ordenar por tipo de delitos en forma descendente
+select *from modulo_victimizacion where perdida>1000 order by tipo_delito desc;
+-- Seleccionando toda la tabla dónde la pérdida es >=2000 y la entidad ='01'
+select *from modulo_victimizacion where perdida>=2000 and entidad ='01';
+-- Seleccionando toda la tabla dónde el tipo de delito es 3 y 4, y ordene por columna apellido de forma ascendete
+select *from modulo_victimizacion where tipo_delito in (3,4) order by apellido asc;
+-- seleccionando toda la tabla dónde el tipo de delito es 3 y 4, y el nombre de la persona sea Luis
+select *from modulo_victimizacion where tipo_delito in (3,4) and nombre='Luis';
+-- seleccionando toda la tabla donde no se cumple que la perdida =4500
+select *from modulo_victimizacion where not perdida=4500;
+------------------------------------------------------------------------------------------
+-- delimitando la visualización de una tabla
+-- mostrando todos los registros de la tabla apartir del registro 2, se tiene en cuenta que el índice comienza en cero
+select *from modulo_victimizacion offset 2;
+-- mostrando solo los dos primeros registros
+select *from modulo_victimizacion limit 2;
+-- mostrando toda la tabla donde la pérdida esta entre 1000 y 3000
+select *from modulo_victimizacion where perdida between 1000 and 3000;
+---------------------------------------------------------------------------------------
+--# Filtros con expresiones#
+-- seleccionando toda la tabla donde el nombre comience con la palabra 'Luis' y termine en cualquier cosa
+select *from modulo_victimizacion where nombre like 'Luis%';
+-- seleccionando topda la tabla donde el apellido termine con la palabra 'iz' y comience con cualquie cosa
+select *from modulo_victimizacion where apellido like '%iz';
+-- seleccionando toda la tabla donde los apellidos contengas ui
+select *from modulo_victimizacion where apellido like '%ui%';
+-- seleccionando toda la tabla donde los nombres contenga una "u" previa a "s" y que pueden no comenzar en u y s
+select *from modulo_victimizacion where nombre like '%u%s%';
+-- seleccionando toda la tabla donde los nombres inician con 'Lu' y contiene 2 caracteres después
+select *from modulo_victimizacion where nombre like 'Lu__';
