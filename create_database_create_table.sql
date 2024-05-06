@@ -55,3 +55,13 @@ select *from modulo_victimizacion where apellido like '%ui%';
 select *from modulo_victimizacion where nombre like '%u%s%';
 -- seleccionando toda la tabla donde los nombres inician con 'Lu' y contiene 2 caracteres después
 select *from modulo_victimizacion where nombre like 'Lu__';
+---------------------------------------------------------------------------------------
+-- calculando el promedio de la columna perdida
+select avg(perdida) promedio_total
+from modulo_victimizacion;
+-- calculando la suma total de la columna perdida
+select sum(perdida)as suma_total
+from modulo_victimizacion;
+-- redondeando operacion
+select round(avg(perdida),2) promedio_total
+from modulo_victimizacion;
