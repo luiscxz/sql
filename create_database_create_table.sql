@@ -65,3 +65,24 @@ from modulo_victimizacion;
 -- redondeando operacion
 select round(avg(perdida),2) promedio_total
 from modulo_victimizacion;
+-- funsion random y fijare semilla
+select setseed(0.5);
+select random();
+-- elevando los registros de la columna tipo_delito a los registros de la columna num_delito
+select tipo_delito,num_delito, pow(tipo_delito,num_delito) from modulo_victimizacion;
+-- calculando el residuo o modulo
+select mod(5,5);
+-------------------
+------------------Funciones de texto
+--convirtiendo columna nombres a mayuscula
+select upper(nombre) from modulo_victimizacion;
+--convirtiendo columna nombres a minuscula
+select lower (nombre) from modulo_victimizacion;
+-- uniendo nombre y apellido en una sola columna
+select nombre,apellido, concat(nombre,' ',apellido) as nombre_completo
+	from modulo_victimizacion;
+---------- length
+
+select concat('La persona ', nombre,' ',upper(apellido),' ha tenido una pérdida de $', perdida) as frase,
+	length(concat('La persona ', nombre,' ',apellido,' ha tenido una pérdida de $', perdida)) as longitud_frase
+	from modulo_victimizacion;
