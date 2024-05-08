@@ -86,3 +86,5 @@ select nombre,apellido, concat(nombre,' ',apellido) as nombre_completo
 select concat('La persona ', nombre,' ',upper(apellido),' ha tenido una pérdida de $', perdida) as frase,
 	length(concat('La persona ', nombre,' ',apellido,' ha tenido una pérdida de $', perdida)) as longitud_frase
 	from modulo_victimizacion;
+---- Funciones para eliminar espacios en una cadena de texto
+select '    hola  ',length('    hola  '),trim('    hola  '),length(trim('    hola  '));
