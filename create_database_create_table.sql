@@ -88,3 +88,54 @@ select concat('La persona ', nombre,' ',upper(apellido),' ha tenido una pérdida
 	from modulo_victimizacion;
 ---- Funciones para eliminar espacios en una cadena de texto
 select '    hola  ',length('    hola  '),trim('    hola  '),length(trim('    hola  '));
+---------------------------------------------------------------------------------------
+--- Cláusula Group by
+---------------------------------------------------------------------------------------
+create table info_paises(continente varchar(10),pais varchar(10),cantidad int);
+
+select * from info_paises
+
+insert into info_paises values 
+('America','Mexico',575),
+('Europa', 'España', 975),
+('Europa', 'Italia', 549),
+('America', 'Mexico', 933),
+('Oceania', 'Australia', 653),
+('Asia', 'Japon', 791),
+('Asia', 'China', 712),
+('America', 'Canada', 674),
+('Asia', 'China', 574),
+('Africa', 'Madagascar', 854);
+-------------------------------
+--- Agrupando usando la columna continente y mostrando la suma en cada uno de los grupos usando la columna cantidad
+select continente, sum(cantidad) as suma from info_paises group by continente;
+-- ahora voy a pedirle que me agrupe por contienente y me muestre, la suma, el promedio, máximo, minimo con respecto a la columna cantidad
+--- y ordenamos con respecto a la suma en orden desc
+select continente, 
+	sum(cantidad) as suma,
+	avg(cantidad) as promedio,
+	min(cantidad) as minimo,
+	max(cantidad) as maximo
+from info_paises group by continente order by suma desc;
+-- hago lo mismo pero para el grupo contienente, pais
+select continente,pais, 
+	sum(cantidad) as suma,
+	avg(cantidad) as promedio,
+	min(cantidad) as minimo,
+	max(cantidad) as maximo,
+from info_paises group by continente,pais;
+--- mostrando el continente y el conteo de la tabla info_paises cuando agrupo por continente
+select continente, count(*) as cantidad_paises from info_paises group by continente;
+---- ----------------------------------------------------------------------------------
+--- cláusula HAVING : es parecido al where pero solo se usa cuando se hace uso de GROUP BY
+--- voy a pedirle que me agrupe por contienente y me muestre, la suma, el promedio, máximo, minimo con respecto a la columna cantidad
+--- y me muestre solo aquellos que el promedio sea mayor a 760
+select continente, 
+	sum(cantidad) as suma,
+	avg(cantidad) as promedio,
+	max(cantidad) as maximo,
+	min(cantidad) as minimo,
+	count(*) as total_paises
+from info_paises 
+group by continente
+having avg(cantidad) > 760;
