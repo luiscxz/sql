@@ -44,3 +44,23 @@ min(Magnitud) as mag_mimina,
 max(Magnitud) as mag_maxima,
 avg(Magnitud) as magnitud_prom
 from sismos group by entidad;
+
+-- Calculando la magnitud mínima, máxima y promedio por entidad durante los últimos 10 años
+select right(Municipio,4) as entidad, Anio,
+min(Magnitud) as Magnitud_minima,
+max(Magnitud) as Magnitud_maxima,
+avg(Magnitud) as Magnitud_promedio
+from sismos WHERE Anio > 2012 
+group by entidad,Anio;
+--Muestre el renglón de oxaca donde la magnitud fue de 7.4
+select *from sismos where Municipio ilike '%OAX'  and Magnitud=7.4;
+-- creando tabl Resumen últimos 10 años
+create table Resumen as
+select right(Municipio,4) as entidad, Anio,
+min(Magnitud) as Magnitud_minima,
+max(Magnitud) as Magnitud_maxima,
+avg(Magnitud) as Magnitud_promedio
+from sismos WHERE Anio > 2012 
+group by entidad,Anio;
+-- guardando tabla en archivo csv
+COPY Resumen TO 'D:/3. Cursos/8. diplomado postgresql/AADB/resumen_ultimos_10_anios.csv' CSV HEADER;
